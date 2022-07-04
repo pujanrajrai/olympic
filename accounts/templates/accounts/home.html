@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Raman Associates">
+    <meta name="author" content="">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'assets//plugin/poppins_font/poppins_font.css' %}">
+
+    <!-- Material Design Icon -->
+    <link rel="stylesheet" href="{% static 'assets//fonts/material-design/css/materialdesignicons.css' %}">
+
+    <!-- Searchable Dropdown -->
+    <link href="{% static 'assets/plugin/semantic/semantic.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'assets/scripts/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugin/semantic/semantic.min.js' %}"></script>
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="{% static 'assets//style.css' %}">
+
+</head>
+
+<body>
+
+<!-- Back to top button -->
+<button type="button" class="btn btn-primary btn-floating btn-sm" title="Back To Top" id="btn-back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<div class="main-menu">
+    <header class="header">
+        <a href="/" class="logo">
+            <span class="ico fa fa-gavel"></span> Raman Associates
+        </a>
+        <button type="button" class="button-close fa fa-times js__menu_close"></button>
+        <div class="user">
+            <a href="/" class="avatar"><img src="{% static 'assets/images/logo.png' %}" alt=""></a>
+        </div>
+        <!-- /.user -->
+    </header>
+    <!-- /.header -->
+    <div class="content">
+        <div class="navigation">
+            <h5 class="title">Home</h5>
+            <!-- /.title -->
+        </div>
+    </div>
+</div><!-- /.main-menu -->
+
+<div class="fixed-navbar">
+    <div class="pull-left">
+        <button type="button"
+                class="menu-mobile-button glyphicon glyphicon-menu-hamburger js__menu_mobile"></button>
+        <h1 class="page-title">Profile</h1>
+        <!-- /.page-title -->
+    </div>
+    <!-- /.pull-left -->
+</div>
+<!-- /.fixed-navbar -->
+
+<div id="wrapper">
+
+    <div class="main-content">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible">
+                {% elif message.tags == 'errors' %}
+                    <div class="alert alert-error alert-dismissible">
+                {% endif %}
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row small-spacing">
+            <div class="col-xs-12">
+                <div class="box-content">
+                    <div class="col-md-12 mt-5">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6><i class="fa fa-user"></i>
+                                            &nbsp; email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        {{ request.user }}
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="col-sm-2">
+                        <a class="btn btn-info btn-sm text-white"
+                           href="{% url 'accounts:password_change' %}"><i
+                                class="mdi mdi-lock"></i>
+                            &nbsp; Change Password</a>
+                    </div>
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+                <div class="container-fluid">
+
+                </div>
+                <!-- End Details -->
+                <script>
+                    $('.ui.dropdown').dropdown();
+                </script>
+
+            </div>
+
+            <!-- /.box-content -->
+        </div>
+
+        <!-- /.col-xs-12 -->
+        </div>
+
+
+    </div>
+</div>
+<!-- /.main-content -->
+<!--/#wrapper -->
+
+<footer class="sticky-footer bg-light">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Raman Associate
+                    <script type="text/JavaScript"> var theDate = new Date();
+                    document.write(theDate.getFullYear())
+				</script>
+                </span>
+        </div>
+    </div>
+</footer>
+
+<script src="{% static 'assets/scripts/all.min.js' %}"></script>
+
+<script src="{% static 'assets/plugin/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugin/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/plugin/nprogress/nprogress.js' %}"></script>
+<!-- Validator -->
+<script src="{% static 'assets/plugin/validator.min.js' %}"></script>
+
+<script src="{% static 'assets/scripts/main.js' %}"></script>
+<script>
+    $(function () {
+        $.ajax({
+            method: 'GET',
+            url: '/media/new/notification/',
+            beforeSend: function () {
+            },
+            success: function (total) {
+                console.log(total.total)
+                $("#new_notification").append('' + total.total);
+            },
+            error: function (er) {
+                console.log(er);
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

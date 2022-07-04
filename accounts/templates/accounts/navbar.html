@@ -1,0 +1,44 @@
+{% load static %}
+<div class="main-menu">
+    <header class="header">
+        <a href="/" class="logo">
+            <span class="ico fa fa-gavel"></span> Raman Associates
+        </a>
+        <button type="button" class="button-close fa fa-times js__menu_close"></button>
+        <div class="user">
+            <a href="/" class="avatar"><img src="{% static 'assets/images/logo.png' %}" alt=""></a>
+        </div>
+        <!-- /.user -->
+    </header>
+    <!-- /.header -->
+    <div class="content">
+        <div class="navigation">
+            <h5 class="title">Home</h5>
+            <!-- /.title -->
+<ul class="menu js__accordion">
+                <li class="">
+                    <a class="" href="{% url 'accounts:home' %}"><i
+                            class="menu-icon mdi mdi-account "></i><span>home</span></a>
+                </li>
+            </ul>
+            <ul class="menu js__accordion">
+                <li class="">
+                    <a class="" href="{% url 'accounts:password_change' %}"><i
+                            class="menu-icon mdi mdi-lock-open "></i><span>Change Password</span></a>
+                </li>
+            </ul>
+
+
+            <ul class="menu js__accordion">
+                <li class="">
+                    <a class="" href="{% url 'accounts:logout' %}"><i
+                            class="menu-icon mdi mdi-logout "></i><span>Logout</span></a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /.navigation -->
+    </div>
+    <!-- /.content -->
+</div>
+
