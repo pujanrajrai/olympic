@@ -33,7 +33,7 @@
     <div class="container py-4 mt-5">
         <div class="row g-0 align-items-center mt-5">
             <div class="login-img col-lg-6 mb-5 mb-lg-0 mt-5">
-                <img src="{% static 'assets/images/cyber.jpeg' %}" class="w-100 rounded-4" alt=""/>
+                <img src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg" class="w-100 rounded-4" alt=""/>
             </div>
             <div class="col-lg-6 mb-5 mb-lg-0">
                 <div class="card cascading-right">
@@ -110,8 +110,8 @@
                             </div>
                             {{ captcha_form.errors }}
                             <!-- Submit button -->
-                            <input type="submit" value="Register" class="btn btn-primary btn-block mt-5 mb-2">
-                            <a href="{% url 'accounts:login' %}" type="submit" class="btn btn-primary btn-block mt-5 mb-2">Login Now</a>
+                            <input type="submit" value="Register" class="btn btn btn-block mt-5 mb-2" style="background-color: #F6507B">
+                            <a href="{% url 'accounts:login' %}" type="submit"class="btn btn btn-block mt-5 mb-2" style="background-color: #F6507B">Login Now</a>
                         </form>
                     </div>
                 </div>

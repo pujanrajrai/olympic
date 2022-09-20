@@ -153,7 +153,10 @@ def verify_email(request):
 
 @login_required()
 def home(request):
-    return render(request, 'accounts/home.html')
+    context = {
+        'users': MyUser.objects.all()
+    }
+    return render(request, 'accounts/home.html',context)
 
 
 # password change
@@ -173,7 +176,6 @@ def password_change(request):
         if not captcha_form.is_valid():
             context['captcha_errors'] = "Captcha Not Correct"
             return render(request, 'accounts/change_password.html', context)
-
 
         if not request.user.check_password(old_password):
             context['errors'] = 'Your password didnot match with old password'
@@ -195,3 +197,58 @@ def password_change(request):
         else:
             context['errors'] = form.errors
     return render(request, 'accounts/change_password.html', context)
+
+
+# password change
+def update_password(request, email):
+    context = {}
+    context['active'] = 'users'
+    context['email'] = email
+    context['captcha_form'] = CaptchaFieldForm()
+    if request.method == 'POST':
+        captcha_form = CaptchaFieldForm(request.POST)
+        if not captcha_form.is_valid():
+            context['captcha_errors'] = "Captcha Not Correct"
+            return render(request, 'accounts/admin_update_password.html', context)
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        data = {"password": password, 'password2': password2}
+        if password != password2:
+            context['errors'] = 'your confirmed password didnot matched'
+            return render(request, 'accounts/admin_update_password.html', context)
+        form = ChangePasswordForm(data)
+        if form.is_valid():
+            MyUser.objects.filter(email=email).update(password=form.cleaned_data['password'])
+            messages.success(request,
+                             f'Password has been changed successfully. Please Login with new password')
+            return redirect('accounts:login')
+        else:
+            context['errors'] = form.errors
+    return render(request, 'accounts/admin_update_password.html', context)
+
+
+def block_user(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST['email']
+        except:
+            email = ''
+
+        user = MyUser.objects.filter(email=email)
+        if user.exists():
+            user.update(is_blocked=True)
+            messages.success(request, f'Email : {email} blocked successfully')
+        return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+
+def unblock_user(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST['email']
+        except:
+            email = ''
+        user = MyUser.objects.filter(email=email).filter(is_blocked=True)
+        if user.exists():
+            user.update(is_blocked=False)
+            messages.success(request, f'Email {email} unblocked successfully')
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))

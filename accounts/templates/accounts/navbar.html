@@ -2,11 +2,12 @@
 <div class="main-menu">
     <header class="header">
         <a href="/" class="logo">
-            <span class="ico fa fa-gavel"></span> Cyber Security
+            <span class="ico fa fa-gavel"></span> Olympic Games
         </a>
-        {#        <button type="button" class="button-close fa fa-times js__menu_close"></button>#}
-        {#        <div class="user">#}
-        {#        </div>#}
+        <button type="button" class="button-close fa fa-times js__menu_close"></button>
+        <div class="user">
+            <a href="/" class="avatar"><img src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg" style="margin-top: 16px;" alt=""></a>
+        </div>
         <!-- /.user -->
     </header>
     <!-- /.header -->
@@ -22,10 +23,18 @@
             </ul>
             <ul class="menu js__accordion">
                 <li class="">
+                    <a class="" href="{% url 'broadcast:list_broadcast' 'Live' %}"><i
+                            class="menu-icon mdi mdi-video "></i><span>Broadcast</span></a>
+                </li>
+            </ul>
+            <ul class="menu js__accordion">
+                <li class="">
                     <a class="" href="{% url 'accounts:password_change' %}"><i
                             class="menu-icon mdi mdi-lock-open "></i><span>Change Password</span></a>
                 </li>
             </ul>
+
+
 
 
             <ul class="menu js__accordion">

@@ -1,0 +1,22 @@
+{% extends 'accounts/form_base.html' %}
+{% block title %}Add Video{% endblock %}
+{% block pagetitle %}Add Video{% endblock %}
+{% block body %}
+    <form method="post" onsubmit="myFunction()">
+        {% csrf_token %}
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }} {{ field }}
+                {{ field.errors }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Add Video</button>
+    </form>
+{% endblock %}

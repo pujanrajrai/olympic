@@ -4,7 +4,6 @@ from django.contrib.auth.hashers import make_password
 
 from accounts.models import MyUser
 
-
 class CaptchaFieldForm(forms.Form):
     captcha = CaptchaField()
 
