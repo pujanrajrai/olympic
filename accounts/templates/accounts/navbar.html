@@ -6,7 +6,9 @@
         </a>
         <button type="button" class="button-close fa fa-times js__menu_close"></button>
         <div class="user">
-            <a href="/" class="avatar"><img src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg" style="margin-top: 16px;" alt=""></a>
+            <a href="/" class="avatar"><img
+                    src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg"
+                    style="margin-top: 16px;" alt=""></a>
         </div>
         <!-- /.user -->
     </header>
@@ -15,12 +17,14 @@
         <div class="navigation">
             <h5 class="title">Home</h5>
             <!-- /.title -->
-            <ul class="menu js__accordion">
-                <li class="">
-                    <a class="" href="{% url 'accounts:home' %}"><i
-                            class="menu-icon mdi mdi-account "></i><span>home</span></a>
-                </li>
-            </ul>
+            {% if request.user.is_admin %}
+                <ul class="menu js__accordion">
+                    <li class="">
+                        <a class="" href="{% url 'accounts:home' %}"><i
+                                class="menu-icon mdi mdi-account "></i><span>home</span></a>
+                    </li>
+                </ul>
+            {% endif %}
             <ul class="menu js__accordion">
                 <li class="">
                     <a class="" href="{% url 'broadcast:list_broadcast' 'Live' %}"><i
@@ -33,8 +37,6 @@
                             class="menu-icon mdi mdi-lock-open "></i><span>Change Password</span></a>
                 </li>
             </ul>
-
-
 
 
             <ul class="menu js__accordion">

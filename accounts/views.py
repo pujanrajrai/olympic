@@ -8,9 +8,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.urls import reverse_lazy
+
 from accounts.forms import CaptchaFieldForm, MyUserCreationForm, ChangePasswordForm
 from accounts.models import MyUser, EmailVerification
 from cyber_security.settings import EMAIL_HOST_USER
+from decorators import is_admin, is_login
 
 
 def login(request):
@@ -31,7 +34,7 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('accounts:home')
+            return redirect('/')
         else:
             context['errors'] = "Email or Password is incorrect"
             context['email'] = email
@@ -89,11 +92,12 @@ def register(request):
             context['email'] = request.POST['email']
             context['password'] = password1
             context['password2'] = password2
+
     return render(request, 'accounts/register.html', context)
 
 
 # sending email verification code
-@login_required()
+@is_login()
 def send_email_verification_code(request):
     user = request.user
     myuser = MyUser.objects.get(email=request.user)
@@ -131,7 +135,7 @@ def send_email_verification_code(request):
     return redirect('accounts:verify_email')
 
 
-@login_required()
+@is_login()
 def verify_email(request):
     if MyUser.objects.get(email=request.user).is_email_verified:
         return redirect('accounts:home')
@@ -151,16 +155,18 @@ def verify_email(request):
     return render(request, 'accounts/verify_email.html')
 
 
-@login_required()
+@is_login()
 def home(request):
+    if not request.user.is_admin:
+        return redirect('/videos/list/Live')
     context = {
         'users': MyUser.objects.all()
     }
-    return render(request, 'accounts/home.html',context)
+    return render(request, 'accounts/home.html', context)
 
 
 # password change
-@login_required()
+@is_login()
 def password_change(request):
     context = {}
     context['captcha_form'] = CaptchaFieldForm()
@@ -200,6 +206,7 @@ def password_change(request):
 
 
 # password change
+@is_admin()
 def update_password(request, email):
     context = {}
     context['active'] = 'users'
@@ -227,6 +234,7 @@ def update_password(request, email):
     return render(request, 'accounts/admin_update_password.html', context)
 
 
+@is_admin()
 def block_user(request):
     if request.method == 'POST':
         try:
@@ -241,6 +249,7 @@ def block_user(request):
         return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
+@is_admin()
 def unblock_user(request):
     if request.method == 'POST':
         try:

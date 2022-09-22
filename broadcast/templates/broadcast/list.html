@@ -40,11 +40,14 @@
 
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}All User{% endblock %}
-{% block pagetitle %}Users{% endblock %}
+{% block title %}Videos{% endblock %}
+{% block pagetitle %}Videos{% endblock %}
 
 {% block body %}
-        <h1>Add Videos: <a href="{% url 'broadcast:create_broadcast' %}" class="btn btn-sm btn-primary">Add Videos</a></h1>
+    {% if request.user.is_admin %}
+        <h1>Add Videos: <a href="{% url 'broadcast:create_broadcast' %}" class="btn btn-sm btn-primary">Add Videos</a>
+        </h1>
+    {% endif %}
     <br>
     <a href="{% url 'broadcast:list_broadcast' 'Live' %}" class="btn btn-sm btn-secondary">Live</a>&nbsp;&nbsp;&nbsp;
     <a href="{% url 'broadcast:list_broadcast' 'Highlights' %}" class="btn btn-sm btn-primary">Highlights</a><br><br>
@@ -66,13 +69,17 @@
                 <td>{{ vid.total_view }}</td>
                 <td>
                     <a class="btn btn-sm btn-primary" target="_blank" href="{% url 'broadcast:view_video' vid.pk %}">View</a><br>
-                    <a class="btn btn-sm btn-warning" href="{% url 'broadcast:update_broadcast' vid.pk %}">Update</a>
-                    <form action="{% url 'broadcast:delete_video' %}" method="POST" onsubmit="return confirm('Are You sure you want to delete?')">
-                        {% csrf_token %}
-                        <input type="hidden" name="pk" value="{{ vid.pk }}">
-                        <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                    {% if request.user.is_admin %}
+                        <a class="btn btn-sm btn-warning"
+                           href="{% url 'broadcast:update_broadcast' vid.pk %}">Update</a>
+                        <form action="{% url 'broadcast:delete_video' %}" method="POST"
+                              onsubmit="return confirm('Are You sure you want to delete?')">
+                            {% csrf_token %}
+                            <input type="hidden" name="pk" value="{{ vid.pk }}">
+                            <input type="submit" class="btn btn-sm btn-danger" value="Delete">
 
-                    </form>
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

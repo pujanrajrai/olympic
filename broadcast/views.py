@@ -1,6 +1,10 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+
+from decorators import is_admin,is_login
 from .forms import BroadcastForm
 from .models import Broadcast
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
@@ -8,7 +12,7 @@ from django.urls import reverse_lazy
 
 
 # Create your views here.
-
+@method_decorator(is_admin(), name='dispatch')
 class BroadCastCreateView(CreateView):
     form_class = BroadcastForm
     success_url = 'nosuccess'
@@ -19,6 +23,7 @@ class BroadCastCreateView(CreateView):
         return reverse_lazy('broadcast:list_broadcast', kwargs={'type': broadcast_type})
 
 
+@method_decorator(is_login(), name='dispatch')
 class BroadCastListView(ListView):
     model = Broadcast
     context_object_name = 'videos'
@@ -32,6 +37,7 @@ class BroadCastListView(ListView):
             return Broadcast.objects.filter(categories__name='Highlights')
 
 
+@method_decorator(is_admin(), name='dispatch')
 class BroadCastUpdateView(UpdateView):
     form_class = BroadcastForm
     model = Broadcast
@@ -41,7 +47,7 @@ class BroadCastUpdateView(UpdateView):
         broadcast_type = self.object.categories
         return reverse_lazy('broadcast:list_broadcast', kwargs={'type': broadcast_type})
 
-
+@is_admin()
 def delete_video(request):
     if request.method == 'POST':
         Broadcast.objects.filter(pk=request.POST['pk']).delete()
@@ -49,9 +55,10 @@ def delete_video(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@is_login()
 def view_video(request, pk):
     broad_cast = Broadcast.objects.get(pk=pk)
-    broad_cast.total_view = broad_cast.total_view+1
+    broad_cast.total_view = broad_cast.total_view + 1
     broad_cast.save()
     context = {
         'videos': broad_cast

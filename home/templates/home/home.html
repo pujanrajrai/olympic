@@ -8,7 +8,7 @@
     <meta name="keywords" content="Manup, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Manup | Template</title>
+    <title>Fun Olympic</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800,900&display=swap"
@@ -48,7 +48,28 @@
 
                 </ul>
             </nav>
-            <a href="{% url 'accounts:login' %}" class="primary-btn top-btn"><i class="fa fa-ticket"></i> Login</a>
+            {% if request.user.is_active %}
+                {% if request.user.is_admin %}
+                    <a href="{% url 'accounts:home' %}" class="primary-btn top-btn">
+                        <i class="fa fa-ticket"></i>
+                        Dashboard
+                    </a>
+
+                {% else %}
+
+                    <a class="primary-btn top-btn" href="{% url 'broadcast:list_broadcast' 'Live' %}">
+                        Live
+                    </a>
+                    <a class="primary-btn top-btn" href="{% url 'broadcast:list_broadcast' 'Highlights' %}">
+                        Highlights
+                    </a>
+                {% endif %}
+
+            {% else %}
+                <a href="{% url 'accounts:login' %}" class="primary-btn top-btn"><i class="fa fa-ticket"></i> Login</a>
+
+
+            {% endif %}
         </div>
         <div id="mobile-menu-wrap"></div>
     </div>
@@ -137,7 +158,6 @@
 <!-- Home About Section End -->
 
 
-
 <!-- Schedule Section Begin -->
 <section class="schedule-section spad">
     <div class="container">
@@ -191,7 +211,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -215,7 +236,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -239,7 +261,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -263,7 +286,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -289,7 +313,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -313,7 +338,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -337,7 +363,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -361,7 +388,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -387,7 +415,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -411,7 +440,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -435,7 +465,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -459,7 +490,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -485,7 +517,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -509,7 +542,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -533,7 +567,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -555,9 +590,10 @@
                             <div class="st-content">
                                 <div class="container">
                                     <div class="row">
-                                       <div class="col-lg-3">
+                                        <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -583,7 +619,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -607,7 +644,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -631,7 +669,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -655,7 +694,8 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="sc-pic">
-                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png" alt="">
+                                                <img src="https://assets.khelnow.com/news/uploads/2022/09/India-vs-Nepal-SAFF-U-17-Championship-2022-lead.png"
+                                                     alt="">
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
@@ -667,7 +707,7 @@
                                         <div class="col-lg-4">
                                             <ul class="sc-widget">
                                                 <li><i class="fa fa-clock-o"></i> 08:00 am - 10:00 AM</li>
-                                                <li><i class="fa fa-map-marker"></i>  Beijing, China
+                                                <li><i class="fa fa-map-marker"></i> Beijing, China
 
                                                 </li>
                                             </ul>
@@ -716,7 +756,9 @@
             </div>
             <div class="col-lg-6">
                 <div class="cs-map">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391566.3391962266!2d116.3974589!3d39.9388838!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35f05296e7142cb9%3A0xb9625620af0fa98a!2sBeijing%2C%20China!5e0!3m2!1sen!2snp!4v1663595598529!5m2!1sen!2snp" width="400" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391566.3391962266!2d116.3974589!3d39.9388838!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35f05296e7142cb9%3A0xb9625620af0fa98a!2sBeijing%2C%20China!5e0!3m2!1sen!2snp!4v1663595598529!5m2!1sen!2snp"
+                            width="400" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -763,7 +805,9 @@
             <div class="col-lg-12">
                 <div class="footer-text">
                     <div class="ft-logo">
-                        <a href="#" class="footer-logo"><img src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg" height="200" alt=""></a>
+                        <a href="#" class="footer-logo"><img
+                                src="https://stillmed.olympic.org/media/Images/OlympicOrg/IOC/The_Organisation/The-Olympic-Rings/Olympic_rings_TM_c_IOC_All_rights_reserved_1.jpg"
+                                height="200" alt=""></a>
                     </div>
 
 
