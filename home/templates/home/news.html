@@ -1,0 +1,59 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">News</h5>
+                <h1 class="display-4">Our Latest News</h1>
+            </div>
+            <div class="row g-5">
+                {% for n in blogs %}
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="bg-light rounded overflow-hidden">
+                            <img class="img-fluid w-100"
+                                 src="{{ n.picture.url }}"
+                                 alt="">
+                            <div class="p-4">
+                                <a class="h3 d-block mb-3" href="{% url 'home:news_details' n.pk %}">{{ n.title|truncatechars:30 }}</a>
+                                <p class="m-0">{{ n.short_desc }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+    <nav aria-label="Page navigation" style="margin-left: 40%;">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">begin</span>
+                    </a>
+                </li>   {% endif %}
+
+            {% for n in page_obj.paginator.page_range %}
+                {% if page_obj.number == n %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                    </li>
+                {% elif n > page_obj.number|add:'-3' and n < page_obj.number|add:'3' %}
+                    <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">end</span>
+                    </a>
+                </li>
+            {% endif %}   </ul>
+    </nav>
+{% endblock %}

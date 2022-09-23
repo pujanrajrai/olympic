@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block body %}
+    <!-- Blog Start -->
+    <!-- Blog Start -->
+    <div class="container py-5" style="margin-left: 20%;">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <!-- Blog Detail Start -->
+                <div class="mb-5">
+                    <img class="img-fluid w-100 rounded mb-5" src="{{ player.profile.url }}" alt="">
+                    <h1 class="mb-4">{{ player.name }}</h1>
+                    <p>{{ player.desc }}</p>
+                </div>
+                <!-- Blog Detail End -->
+                <!-- Comment Form End -->
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

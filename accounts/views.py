@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 
 from accounts.forms import CaptchaFieldForm, MyUserCreationForm, ChangePasswordForm
 from accounts.models import MyUser, EmailVerification
-from cyber_security.settings import EMAIL_HOST_USER
+from olympic.settings import EMAIL_HOST_USER
 from decorators import is_admin, is_login
 
 
@@ -20,7 +20,7 @@ def login(request):
     context = {"captcha_form": CaptchaFieldForm()}
     if request.user.is_authenticated:
         if request.user:
-            return redirect('accounts:home')
+            return redirect('/')
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -51,7 +51,7 @@ def logout(request):
 def register(request):
     if request.user.is_authenticated:
         if request.user:
-            return redirect('accounts:home')
+            return redirect('/')
 
     context = {'form': MyUserCreationForm(), "captcha_form": CaptchaFieldForm()}
     if request.method == 'POST':
@@ -138,17 +138,17 @@ def send_email_verification_code(request):
 @is_login()
 def verify_email(request):
     if MyUser.objects.get(email=request.user).is_email_verified:
-        return redirect('accounts:home')
+        return redirect('/')
     if request.method == 'POST':
         if MyUser.objects.get(email=request.user).is_email_verified:
-            return redirect('accounts:home')
+            return redirect('/')
 
         request_code = request.POST['otp1'] + request.POST['otp2'] + request.POST['otp3'] + request.POST['otp4'] + \
                        request.POST['otp5'] + request.POST['otp6']  # code send from user to verify
         code = EmailVerification.objects.get(users=request.user).verification_code
         if request_code == code:
             MyUser.objects.filter(email=request.user).update(is_email_verified=True)
-            return redirect('accounts:home')
+            return redirect('/')
         else:
             context = {'error': 'code you have entered is wrong'}
             return render(request, 'accounts/verify_email.html', context)
