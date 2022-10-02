@@ -94,6 +94,7 @@
                         <a class="nav-item nav-link" href="/admin/">Dashboard</a>
                     {% else %}
                         <a class="nav-item nav-link" href="{% url 'accounts:password_change' %}">Change_Password</a>
+                        <a class="nav-item nav-link" href="{% url 'accounts:logout' %}">Logout</a>
                     {% endif %}
                 </div>
             </div>

@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+
 from broadcast.models import News, PlayerProfile, Broadcast
 from django.views.generic import ListView
 
 
 # Create your views here.
+from decorators import is_login
 
 
 def home(request):
@@ -44,14 +47,14 @@ class PlayerDetailsListView(ListView):
     def get_queryset(self):
         return PlayerProfile.objects.get(pk=self.kwargs['pk'])
 
-
+@method_decorator(is_login(), name='dispatch')
 class LiveMatchesListView(ListView):
     model = Broadcast
     context_object_name = 'matches'
     template_name = 'home/live_match.html'
     paginate_by = 12
 
-
+@method_decorator(is_login(), name='dispatch')
 class LiveMatchesDetailsListView(ListView):
     model = Broadcast
     context_object_name = 'match'

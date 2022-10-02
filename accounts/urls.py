@@ -15,5 +15,4 @@ urlpatterns = [
     path('reset/password/<str:email>/', views.update_password, name='reset_password'),
     path('block/user/', views.block_user, name='block_user'),
     path('unblock/user/', views.unblock_user, name='unblock_user'),
-
 ]
