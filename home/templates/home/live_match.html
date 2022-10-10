@@ -15,6 +15,7 @@
                             <div class="p-4">
                                 <a class="h3 d-block mb-3"
                                    href="{% url 'home:live_details' match.pk %}">{{ match.title|truncatechars:40 }}</a>
+                                <p class="btn btn-primary">{{ match.categories }}</p>
                                 <p class="m-0">Total Views: {{ match.total_view }}</p>
                             </div>
                         </div>

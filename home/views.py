@@ -11,7 +11,8 @@ from decorators import is_login
 
 def home(request):
     context = {
-        'news': News.objects.all()[:3]
+        'news': News.objects.all()[:3],
+        'active':'home'
     }
     return render(request, 'home/home.html', context)
 
@@ -22,6 +23,11 @@ class NewsListView(ListView):
     template_name = 'home/news.html'
     paginate_by = 12
 
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'news'
+        return context
+
 
 class NewsDetailsListView(ListView):
     model = News
@@ -31,18 +37,32 @@ class NewsDetailsListView(ListView):
     def get_queryset(self):
         return News.objects.get(pk=self.kwargs['pk'])
 
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'news'
+        return context
+
 
 class PlayerProfileListView(ListView):
     model = PlayerProfile
     context_object_name = 'players'
     template_name = 'home/player.html'
     paginate_by = 12
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'players'
+        return context
 
 
 class PlayerDetailsListView(ListView):
     model = PlayerProfile
     context_object_name = 'player'
     template_name = 'home/players_details.html'
+
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'players'
+        return context
 
     def get_queryset(self):
         return PlayerProfile.objects.get(pk=self.kwargs['pk'])
@@ -54,11 +74,21 @@ class LiveMatchesListView(ListView):
     template_name = 'home/live_match.html'
     paginate_by = 12
 
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'matches'
+        return context
+
 @method_decorator(is_login(), name='dispatch')
 class LiveMatchesDetailsListView(ListView):
     model = Broadcast
     context_object_name = 'match'
     template_name = 'home/live_match_details.html'
+
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['active'] = 'matches'
+        return context
 
     def get_queryset(self):
         return Broadcast.objects.get(pk=self.kwargs['pk'])
